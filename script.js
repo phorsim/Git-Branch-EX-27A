@@ -1,1418 +1,300 @@
-/* =========================================
-   LUXEWEAR E-COMMERCE JAVASCRIPT
-========================================= */
+/* ==========================================================
+   FIELDWORK — store data + interactions
+   ========================================================== */
 
-
-/* =========================================
-   PRODUCT DATA
-========================================= */
-
-const products = [
-
+const PRODUCTS = [
     {
-        id: 1,
-        name: "Essential White T-Shirt",
-        category: "T-Shirts",
-        price: 18.99,
-        oldPrice: null,
-        icon: "👕",
-        badge: "NEW",
-        description:
-            "A clean and comfortable everyday T-shirt made for modern casual outfits.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p1',
+        name: 'Waxed Canvas Jacket',
+        category: 'outerwear',
+        price: 228,
+        badge: 'New',
+        fit: 'Relaxed',
+        fabric: '14oz Waxed Canvas',
+        desc: 'Weatherproof shell built for job sites and long commutes.',
+        img: 'https://picsum.photos/seed/fieldwork-jacket/600/750'
     },
-
     {
-        id: 2,
-        name: "Classic Black T-Shirt",
-        category: "T-Shirts",
-        price: 16.99,
-        oldPrice: 22.99,
-        icon: "👕",
-        badge: "SALE",
-        description:
-            "A timeless black T-shirt that works with almost every outfit.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p2',
+        name: 'Chore Coat',
+        category: 'outerwear',
+        price: 189,
+        fit: 'Boxy',
+        fabric: '12oz Cotton Twill',
+        desc: 'A workshop staple with triple-stitched patch pockets.',
+        img: 'https://picsum.photos/seed/fieldwork-chore/600/750'
     },
-
     {
-        id: 3,
-        name: "Premium Oversized Tee",
-        category: "T-Shirts",
-        price: 24.99,
-        oldPrice: null,
-        icon: "👕",
-        badge: "NEW",
-        description:
-            "Relaxed oversized fit with a premium feel for a contemporary streetwear look.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p3',
+        name: 'Heavyweight Tee',
+        category: 'basics',
+        price: 42,
+        fit: 'Regular',
+        fabric: '220gsm Combed Cotton',
+        desc: 'Dense, boxy, and built to outlast a hundred washes.',
+        img: 'https://picsum.photos/seed/fieldwork-tee/600/750'
     },
-
     {
-        id: 4,
-        name: "Classic Oxford Shirt",
-        category: "Shirts",
-        price: 34.99,
-        oldPrice: null,
-        icon: "👔",
-        badge: null,
-        description:
-            "A smart Oxford shirt suitable for work, events and everyday style.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p4',
+        name: 'Flannel Overshirt',
+        category: 'basics',
+        price: 96,
+        badge: 'Restock',
+        fit: 'Relaxed',
+        fabric: 'Brushed Cotton Flannel',
+        desc: 'Layer it open or button it up, it holds its shape either way.',
+        img: 'https://picsum.photos/seed/fieldwork-flannel/600/750'
     },
-
     {
-        id: 5,
-        name: "Linen Summer Shirt",
-        category: "Shirts",
-        price: 29.99,
-        oldPrice: 39.99,
-        icon: "👔",
-        badge: "SALE",
-        description:
-            "Lightweight linen shirt designed to keep you comfortable on warm days.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p5',
+        name: 'Selvedge Straight Jean',
+        category: 'denim',
+        price: 168,
+        fit: 'Straight',
+        fabric: '13.5oz Selvedge Denim',
+        desc: 'Raw denim that breaks in around you, not the other way around.',
+        img: 'https://picsum.photos/seed/fieldwork-jean/600/750'
     },
-
     {
-        id: 6,
-        name: "Relaxed Cargo Pants",
-        category: "Pants",
-        price: 42.99,
-        oldPrice: null,
-        icon: "👖",
-        badge: "NEW",
-        description:
-            "Modern cargo pants with a relaxed fit and practical everyday pockets.",
-        sizes: ["28", "30", "32", "34", "36"]
+        id: 'p6',
+        name: 'Canvas Work Pant',
+        category: 'denim',
+        price: 142,
+        fit: 'Tapered',
+        fabric: '11oz Duck Canvas',
+        desc: 'Double-knee construction with a hammer loop that actually works.',
+        img: 'https://picsum.photos/seed/fieldwork-pant/600/750'
     },
-
     {
-        id: 7,
-        name: "Classic Denim Jeans",
-        category: "Pants",
-        price: 39.99,
-        oldPrice: 49.99,
-        icon: "👖",
-        badge: "SALE",
-        description:
-            "Classic denim jeans with a comfortable fit and timeless appearance.",
-        sizes: ["28", "30", "32", "34", "36"]
+        id: 'p7',
+        name: 'Insulated Vest',
+        category: 'outerwear',
+        price: 134,
+        fit: 'Regular',
+        fabric: 'Quilted Nylon / Fleece',
+        desc: 'Core warmth without the bulk, for days you need your arms free.',
+        img: 'https://picsum.photos/seed/fieldwork-vest/600/750'
     },
-
     {
-        id: 8,
-        name: "Wide Leg Trousers",
-        category: "Pants",
-        price: 44.99,
-        oldPrice: null,
-        icon: "👖",
-        badge: null,
-        description:
-            "Elegant wide-leg trousers for a clean and sophisticated silhouette.",
-        sizes: ["28", "30", "32", "34", "36"]
+        id: 'p8',
+        name: 'Ribbed Waffle Henley',
+        category: 'basics',
+        price: 58,
+        fit: 'Slim',
+        fabric: 'Waffle Knit Cotton',
+        desc: 'A base layer that still looks finished on its own.',
+        img: 'https://picsum.photos/seed/fieldwork-henley/600/750'
     },
-
     {
-        id: 9,
-        name: "Elegant Summer Dress",
-        category: "Dresses",
-        price: 49.99,
-        oldPrice: 69.99,
-        icon: "👗",
-        badge: "SALE",
-        description:
-            "A lightweight summer dress designed for elegant and effortless style.",
-        sizes: ["XS", "S", "M", "L", "XL"]
-    },
-
-    {
-        id: 10,
-        name: "Minimal Black Dress",
-        category: "Dresses",
-        price: 59.99,
-        oldPrice: null,
-        icon: "👗",
-        badge: "NEW",
-        description:
-            "A minimal black dress with a timeless design for special occasions.",
-        sizes: ["XS", "S", "M", "L", "XL"]
-    },
-
-    {
-        id: 11,
-        name: "Oversized Denim Jacket",
-        category: "Jackets",
-        price: 54.99,
-        oldPrice: 74.99,
-        icon: "🧥",
-        badge: "SALE",
-        description:
-            "An oversized denim jacket that adds an effortless streetwear touch.",
-        sizes: ["S", "M", "L", "XL"]
-    },
-
-    {
-        id: 12,
-        name: "Classic Bomber Jacket",
-        category: "Jackets",
-        price: 64.99,
-        oldPrice: null,
-        icon: "🧥",
-        badge: "NEW",
-        description:
-            "A versatile bomber jacket with a modern silhouette and comfortable fit.",
-        sizes: ["S", "M", "L", "XL"]
+        id: 'p9',
+        name: 'Slim Selvedge Jean',
+        category: 'denim',
+        price: 172,
+        badge: 'New',
+        fit: 'Slim',
+        fabric: '13oz Selvedge Denim',
+        desc: 'Same raw denim, cut closer through the leg.',
+        img: 'https://picsum.photos/seed/fieldwork-slimjean/600/750'
     }
-
 ];
 
-
-/* =========================================
-   CART
-========================================= */
-
-let cart =
-    JSON.parse(
-        localStorage.getItem("luxewearCart")
-    ) || [];
-
-
-/* =========================================
-   DOM ELEMENTS
-========================================= */
-
-const productsGrid =
-    document.getElementById("productsGrid");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const categoryFilter =
-    document.getElementById("categoryFilter");
-
-const sortFilter =
-    document.getElementById("sortFilter");
-
-const noProducts =
-    document.getElementById("noProducts");
-
-const cartBtn =
-    document.getElementById("cartBtn");
-
-const cartSidebar =
-    document.getElementById("cartSidebar");
-
-const cartOverlay =
-    document.getElementById("cartOverlay");
-
-const closeCart =
-    document.getElementById("closeCart");
-
-const cartItems =
-    document.getElementById("cartItems");
-
-const cartEmpty =
-    document.getElementById("cartEmpty");
-
-const cartCount =
-    document.getElementById("cartCount");
-
-const cartTotal =
-    document.getElementById("cartTotal");
-
-const productModal =
-    document.getElementById("productModal");
-
-const productModalContent =
-    document.getElementById(
-        "productModalContent"
-    );
-
-const closeProductModal =
-    document.getElementById(
-        "closeProductModal"
-    );
-
-const checkoutModal =
-    document.getElementById(
-        "checkoutModal"
-    );
-
-const checkoutBtn =
-    document.getElementById(
-        "checkoutBtn"
-    );
-
-const closeCheckout =
-    document.getElementById(
-        "closeCheckout"
-    );
-
-const themeBtn =
-    document.getElementById("themeBtn");
-
-const menuBtn =
-    document.getElementById("menuBtn");
-
-const navMenu =
-    document.getElementById("navMenu");
-
-
-/* =========================================
-   FORMAT MONEY
-========================================= */
-
-function formatPrice(price) {
-
-    return `$${price.toFixed(2)}`;
-
-}
-
-
-/* =========================================
-   DISPLAY PRODUCTS
-========================================= */
-
-function displayProducts(list) {
-
-    productsGrid.innerHTML = "";
-
-    if (list.length === 0) {
-
-        noProducts.style.display = "block";
-
-        return;
-
-    }
-
-    noProducts.style.display = "none";
-
-
-    list.forEach(product => {
-
-        const card =
-            document.createElement("article");
-
-        card.className = "product-card";
-
-
-        let badgeHTML = "";
-
-        if (product.badge) {
-
-            badgeHTML = `
-                <span class="product-badge ${product.badge === "SALE"
-                    ? "sale-badge"
-                    : ""
-                }">
-                    ${product.badge}
-                </span>
-            `;
-
-        }
-
-
-        let oldPriceHTML = "";
-
-        if (product.oldPrice) {
-
-            oldPriceHTML = `
-                <span class="old-price">
-                    ${formatPrice(product.oldPrice)}
-                </span>
-            `;
-
-        }
-
-
-        card.innerHTML = `
-
-            <div
-                class="product-image"
-                data-product="${product.id}"
-            >
-
-                ${badgeHTML}
-
-                ${product.icon}
-
-            </div>
-
-            <div class="product-info">
-
-                <span class="product-category">
-                    ${product.category}
-                </span>
-
-                <h3 class="product-name">
-                    ${product.name}
-                </h3>
-
-                <div class="product-price">
-
-                    ${formatPrice(product.price)}
-
-                    ${oldPriceHTML}
-
-                </div>
-
-                <div class="product-actions">
-
-                    <button
-                        class="add-cart"
-                        data-add="${product.id}"
-                    >
-                        ADD TO CART
-                    </button>
-
-                    <button
-                        class="view-product"
-                        data-view="${product.id}"
-                        title="View product"
-                    >
-                        👁
-                    </button>
-
-                </div>
-
-            </div>
-
-        `;
-
-
-        productsGrid.appendChild(card);
-
-    });
-
-}
-
-
-/* =========================================
-   FILTER PRODUCTS
-========================================= */
-
-function filterProducts() {
-
-    const search =
-        searchInput.value
-            .toLowerCase()
-            .trim();
-
-    const category =
-        categoryFilter.value;
-
-    const sort =
-        sortFilter.value;
-
-
-    let result =
-        products.filter(product => {
-
-            const matchesSearch =
-                product.name
-                    .toLowerCase()
-                    .includes(search);
-
-            const matchesCategory =
-                category === "All" ||
-                product.category === category;
-
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
-
-        });
-
-
-    if (sort === "low") {
-
-        result.sort(
-            (a, b) => a.price - b.price
-        );
-
-    }
-
-    if (sort === "high") {
-
-        result.sort(
-            (a, b) => b.price - a.price
-        );
-
-    }
-
-    if (sort === "name") {
-
-        result.sort(
-            (a, b) =>
-                a.name.localeCompare(b.name)
-        );
-
-    }
-
-
-    displayProducts(result);
-
-}
-
-
-/* =========================================
-   SEARCH EVENTS
-========================================= */
-
-searchInput.addEventListener(
-    "input",
-    filterProducts
-);
-
-categoryFilter.addEventListener(
-    "change",
-    filterProducts
-);
-
-sortFilter.addEventListener(
-    "change",
-    filterProducts
-);
-
-
-/* =========================================
-   CATEGORY CARDS
-========================================= */
-
-document
-    .querySelectorAll(".category-card")
-    .forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                const category =
-                    button.dataset.category;
-
-                categoryFilter.value =
-                    category;
-
-                document
-                    .getElementById("shop")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-                filterProducts();
-
-            }
-        );
-
-    });
-
-
-/* =========================================
-   PRODUCT CLICK EVENTS
-========================================= */
-
-productsGrid.addEventListener(
-    "click",
-    event => {
-
-        const addButton =
-            event.target.closest(
-                "[data-add]"
-            );
-
-        const viewButton =
-            event.target.closest(
-                "[data-view]"
-            );
-
-
-        if (addButton) {
-
-            const id =
-                Number(
-                    addButton.dataset.add
-                );
-
-            openProductModal(id);
-
-        }
-
-
-        if (viewButton) {
-
-            const id =
-                Number(
-                    viewButton.dataset.view
-                );
-
-            openProductModal(id);
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   PRODUCT MODAL
-========================================= */
-
-function openProductModal(id) {
-
-    const product =
-        products.find(
-            product => product.id === id
-        );
-
-    if (!product) return;
-
-
-    productModalContent.innerHTML = `
-
-        <div class="modal-product">
-
-            <div class="modal-product-image">
-                ${product.icon}
-            </div>
-
-            <span class="product-category">
-                ${product.category}
-            </span>
-
-            <h2>
-                ${product.name}
-            </h2>
-
-            <p class="modal-description">
-                ${product.description}
-            </p>
-
-            <div class="modal-price">
-                ${formatPrice(product.price)}
-            </div>
-
-            <p class="size-title">
-                SELECT SIZE
-            </p>
-
-            <div class="size-options">
-
-                ${product.sizes
-            .map(
-                (size, index) => `
-                            <button
-                                class="size-btn ${index === 0
-                        ? "active"
-                        : ""
-                    }"
-                                data-size="${size}"
-                            >
-                                ${size}
-                            </button>
-                        `
-            )
-            .join("")
-        }
-
-            </div>
-
-            <button
-                class="btn btn-dark"
-                id="modalAddToCart"
-                style="width:100%"
-            >
-                ADD TO CART
-            </button>
-
+const money = (n) => `$${n.toLocaleString('en-US')}`;
+
+/* ---------------- State ---------------- */
+let cart = [];       // [{id, qty}]
+let activeFilter = 'all';
+
+/* ---------------- DOM refs ---------------- */
+const productGrid = document.getElementById('productGrid');
+const filters = document.getElementById('filters');
+const cartToggle = document.getElementById('cartToggle');
+const cartClose = document.getElementById('cartClose');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartDrawer = document.getElementById('cartDrawer');
+const cartItemsEl = document.getElementById('cartItems');
+const cartEmptyEl = document.getElementById('cartEmpty');
+const cartCountEl = document.getElementById('cartCount');
+const cartSubtotalEl = document.getElementById('cartSubtotal');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const menuToggle = document.getElementById('menuToggle');
+const mainNav = document.getElementById('mainNav');
+const newsletterForm = document.getElementById('newsletterForm');
+const newsletterMsg = document.getElementById('newsletterMsg');
+const toastEl = document.getElementById('toast');
+
+/* ---------------- Render products ---------------- */
+function renderProducts() {
+    const list = PRODUCTS.filter(p => activeFilter === 'all' || p.category === activeFilter);
+
+    productGrid.innerHTML = list.map(p => `
+    <article class="product-card" data-id="${p.id}">
+      <div class="product-media">
+        ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+        <img src="${p.img}" alt="${p.name}, ${p.fabric}, ${p.fit} fit" loading="lazy">
+      </div>
+      <div class="product-info">
+        <span class="product-cat">${p.category}</span>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.desc}</p>
+        <div class="product-bottom">
+          <span class="product-price">${money(p.price)}</span>
+          <button class="add-btn" data-add="${p.id}">Add to Bag</button>
         </div>
-
-    `;
-
-
-    productModal.classList.add("show");
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    const sizeButtons =
-        document.querySelectorAll(
-            ".size-btn"
-        );
-
-
-    let selectedSize =
-        product.sizes[0];
-
-
-    sizeButtons.forEach(button => {
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                sizeButtons.forEach(
-                    btn =>
-                        btn.classList.remove(
-                            "active"
-                        )
-                );
-
-                button.classList.add(
-                    "active"
-                );
-
-                selectedSize =
-                    button.dataset.size;
-
-            }
-        );
-
-    });
-
-
-    document
-        .getElementById("modalAddToCart")
-        .addEventListener(
-            "click",
-            () => {
-
-                addToCart(
-                    product.id,
-                    selectedSize
-                );
-
-                closeProductModalWindow();
-
-            }
-        );
-
+      </div>
+    </article>
+  `).join('');
 }
 
+filters.addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    activeFilter = btn.dataset.filter;
+    [...filters.children].forEach(b => b.classList.toggle('active', b === btn));
+    renderProducts();
+});
 
-/* =========================================
-   CLOSE PRODUCT MODAL
-========================================= */
+productGrid.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-add]');
+    if (!btn) return;
+    addToCart(btn.dataset.add);
+    btn.classList.add('added');
+    const original = btn.textContent;
+    btn.textContent = 'Added ✓';
+    setTimeout(() => { btn.classList.remove('added'); btn.textContent = original; }, 1200);
+});
 
-function closeProductModalWindow() {
-
-    productModal.classList.remove(
-        "show"
-    );
-
-    document.body.style.overflow =
-        "auto";
-
+/* ---------------- Cart logic ---------------- */
+function addToCart(id) {
+    const line = cart.find(l => l.id === id);
+    if (line) { line.qty += 1; } else { cart.push({ id, qty: 1 }); }
+    renderCart();
+    const product = PRODUCTS.find(p => p.id === id);
+    showToast(`${product.name} added to your bag`);
 }
 
-closeProductModal.addEventListener(
-    "click",
-    closeProductModalWindow
-);
-
-
-/* =========================================
-   CART FUNCTIONS
-========================================= */
-
-function addToCart(
-    productId,
-    size = "M"
-) {
-
-    const existing =
-        cart.find(
-            item =>
-                item.productId === productId &&
-                item.size === size
-        );
-
-
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        cart.push({
-
-            productId,
-            size,
-            quantity: 1
-
-        });
-
-    }
-
-
-    saveCart();
-
-    updateCart();
-
-    openCart();
-
+function changeQty(id, delta) {
+    const line = cart.find(l => l.id === id);
+    if (!line) return;
+    line.qty += delta;
+    if (line.qty <= 0) cart = cart.filter(l => l.id !== id);
+    renderCart();
 }
 
-
-/* =========================================
-   SAVE CART
-========================================= */
-
-function saveCart() {
-
-    localStorage.setItem(
-        "luxewearCart",
-        JSON.stringify(cart)
-    );
-
+function removeFromCart(id) {
+    cart = cart.filter(l => l.id !== id);
+    renderCart();
 }
 
+function cartTotal() {
+    return cart.reduce((sum, line) => {
+        const p = PRODUCTS.find(pr => pr.id === line.id);
+        return sum + p.price * line.qty;
+    }, 0);
+}
 
-/* =========================================
-   UPDATE CART
-========================================= */
+function cartCount() {
+    return cart.reduce((sum, line) => sum + line.qty, 0);
+}
 
-function updateCart() {
-
-    cartItems.innerHTML = "";
-
-    let total = 0;
-
-    let itemCount = 0;
-
-
-    cart.forEach(item => {
-
-        const product =
-            products.find(
-                p =>
-                    p.id === item.productId
-            );
-
-        if (!product) return;
-
-
-        const subtotal =
-            product.price *
-            item.quantity;
-
-
-        total += subtotal;
-
-        itemCount += item.quantity;
-
-
-        const cartItem =
-            document.createElement("div");
-
-        cartItem.className =
-            "cart-item";
-
-
-        cartItem.innerHTML = `
-
-            <div class="cart-item-image">
-                ${product.icon}
-            </div>
-
-            <div>
-
-                <h4>
-                    ${product.name}
-                </h4>
-
-                <p>
-                    Size: ${item.size}
-                </p>
-
-                <div class="quantity">
-
-                    <button
-                        data-minus="${product.id}"
-                        data-size="${item.size}"
-                    >
-                        −
-                    </button>
-
-                    <span>
-                        ${item.quantity}
-                    </span>
-
-                    <button
-                        data-plus="${product.id}"
-                        data-size="${item.size}"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-                <button
-                    class="remove-item"
-                    data-remove="${product.id}"
-                    data-size="${item.size}"
-                >
-                    Remove
-                </button>
-
-            </div>
-
-            <div class="cart-item-price">
-                ${formatPrice(subtotal)}
-            </div>
-
-        `;
-
-
-        cartItems.appendChild(
-            cartItem
-        );
-
-    });
-
-
-    cartCount.textContent =
-        itemCount;
-
-    cartTotal.textContent =
-        formatPrice(total);
-
+function renderCart() {
+    cartCountEl.textContent = cartCount();
+    cartSubtotalEl.textContent = money(cartTotal());
 
     if (cart.length === 0) {
-
-        cartEmpty.style.display =
-            "block";
-
-        checkoutBtn.disabled = true;
-
-        checkoutBtn.style.opacity =
-            "0.5";
-
-    } else {
-
-        cartEmpty.style.display =
-            "none";
-
-        checkoutBtn.disabled = false;
-
-        checkoutBtn.style.opacity =
-            "1";
-
+        cartItemsEl.innerHTML = '';
+        cartItemsEl.appendChild(cartEmptyEl);
+        return;
     }
 
+    cartItemsEl.innerHTML = cart.map(line => {
+        const p = PRODUCTS.find(pr => pr.id === line.id);
+        return `
+      <div class="cart-item" data-id="${p.id}">
+        <img src="${p.img}" alt="${p.name}">
+        <div>
+          <div class="cart-item-name">${p.name}</div>
+          <div class="cart-item-price">${money(p.price)}</div>
+          <div class="cart-item-qty">
+            <button class="qty-btn" data-qty="-1">−</button>
+            <span>${line.qty}</span>
+            <button class="qty-btn" data-qty="1">+</button>
+          </div>
+        </div>
+        <button class="cart-item-remove" data-remove>Remove</button>
+      </div>
+    `;
+    }).join('');
 }
 
-
-/* =========================================
-   CART QUANTITY EVENTS
-========================================= */
-
-cartItems.addEventListener(
-    "click",
-    event => {
-
-        const plus =
-            event.target.closest(
-                "[data-plus]"
-            );
-
-        const minus =
-            event.target.closest(
-                "[data-minus]"
-            );
-
-        const remove =
-            event.target.closest(
-                "[data-remove]"
-            );
-
-
-        if (plus) {
-
-            changeQuantity(
-                Number(plus.dataset.plus),
-                plus.dataset.size,
-                1
-            );
-
-        }
-
-
-        if (minus) {
-
-            changeQuantity(
-                Number(minus.dataset.minus),
-                minus.dataset.size,
-                -1
-            );
-
-        }
-
-
-        if (remove) {
-
-            removeFromCart(
-                Number(remove.dataset.remove),
-                remove.dataset.size
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   CHANGE QUANTITY
-========================================= */
-
-function changeQuantity(
-    productId,
-    size,
-    amount
-) {
-
-    const item =
-        cart.find(
-            item =>
-                item.productId === productId &&
-                item.size === size
-        );
-
-
+cartItemsEl.addEventListener('click', (e) => {
+    const item = e.target.closest('.cart-item');
     if (!item) return;
+    const id = item.dataset.id;
 
-
-    item.quantity += amount;
-
-
-    if (item.quantity <= 0) {
-
-        cart =
-            cart.filter(
-                cartItem =>
-                    !(
-                        cartItem.productId === productId &&
-                        cartItem.size === size
-                    )
-            );
-
+    if (e.target.matches('[data-qty]')) {
+        changeQty(id, Number(e.target.dataset.qty));
     }
+    if (e.target.matches('[data-remove]')) {
+        removeFromCart(id);
+    }
+});
 
-
-    saveCart();
-
-    updateCart();
-
-}
-
-
-/* =========================================
-   REMOVE ITEM
-========================================= */
-
-function removeFromCart(
-    productId,
-    size
-) {
-
-    cart =
-        cart.filter(
-            item =>
-                !(
-                    item.productId === productId &&
-                    item.size === size
-                )
-        );
-
-
-    saveCart();
-
-    updateCart();
-
-}
-
-
-/* =========================================
-   OPEN CART
-========================================= */
-
+/* ---------------- Cart drawer open/close ---------------- */
 function openCart() {
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('open');
+    cartDrawer.setAttribute('aria-hidden', 'false');
+}
+function closeCart() {
+    cartDrawer.classList.remove('open');
+    cartOverlay.classList.remove('open');
+    cartDrawer.setAttribute('aria-hidden', 'true');
+}
+cartToggle.addEventListener('click', openCart);
+cartClose.addEventListener('click', closeCart);
+cartOverlay.addEventListener('click', closeCart);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
 
-    cartSidebar.classList.add(
-        "show"
-    );
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+        showToast('Your bag is empty');
+        return;
+    }
+    showToast('This is a demo — no real checkout yet');
+});
 
-    cartOverlay.classList.add(
-        "show"
-    );
+/* ---------------- Mobile menu ---------------- */
+menuToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    menuToggle.classList.toggle('open', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+});
+mainNav.addEventListener('click', (e) => {
+    if (e.target.matches('.nav-link')) {
+        mainNav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+    }
+});
 
+/* ---------------- Newsletter (demo, no backend) ---------------- */
+newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = newsletterForm.querySelector('input');
+    if (!input.value) return;
+    newsletterMsg.textContent = `You're on the list — we'll email ${input.value} when new stock lands.`;
+    input.value = '';
+});
+
+/* ---------------- Toast ---------------- */
+let toastTimer;
+function showToast(msg) {
+    clearTimeout(toastTimer);
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
 }
 
-
-/* =========================================
-   CLOSE CART
-========================================= */
-
-function closeCartWindow() {
-
-    cartSidebar.classList.remove(
-        "show"
-    );
-
-    cartOverlay.classList.remove(
-        "show"
-    );
-
-}
-
-
-cartBtn.addEventListener(
-    "click",
-    openCart
-);
-
-closeCart.addEventListener(
-    "click",
-    closeCartWindow
-);
-
-cartOverlay.addEventListener(
-    "click",
-    closeCartWindow
-);
-
-
-/* =========================================
-   CHECKOUT
-========================================= */
-
-checkoutBtn.addEventListener(
-    "click",
-    () => {
-
-        if (cart.length === 0) {
-
-            alert(
-                "Your cart is empty."
-            );
-
-            return;
-
-        }
-
-        closeCartWindow();
-
-        checkoutModal.classList.add(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "hidden";
-
-    }
-);
-
-
-/* =========================================
-   CLOSE CHECKOUT
-========================================= */
-
-closeCheckout.addEventListener(
-    "click",
-    () => {
-
-        checkoutModal.classList.remove(
-            "show"
-        );
-
-        document.body.style.overflow =
-            "auto";
-
-    }
-);
-
-
-/* =========================================
-   CHECKOUT FORM
-========================================= */
-
-document
-    .getElementById("checkoutForm")
-    .addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById(
-                    "customerName"
-                ).value;
-
-
-            const orderNumber =
-                Math.floor(
-                    100000 +
-                    Math.random() * 900000
-                );
-
-
-            alert(
-                `Thank you, ${name}!
-
-Your order #${orderNumber} has been placed successfully.
-
-We will contact you soon for delivery.`
-            );
-
-
-            cart = [];
-
-            saveCart();
-
-            updateCart();
-
-
-            document
-                .getElementById(
-                    "checkoutForm"
-                )
-                .reset();
-
-
-            checkoutModal.classList.remove(
-                "show"
-            );
-
-            document.body.style.overflow =
-                "auto";
-
-        }
-    );
-
-
-/* =========================================
-   CONTACT FORM
-========================================= */
-
-document
-    .getElementById("contactForm")
-    .addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-
-            const name =
-                document.getElementById(
-                    "contactName"
-                ).value;
-
-
-            alert(
-                `Thank you, ${name}! Your message has been sent.`
-            );
-
-
-            event.target.reset();
-
-        }
-    );
-
-
-/* =========================================
-   NEWSLETTER
-========================================= */
-
-document
-    .getElementById("newsletterForm")
-    .addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-            alert(
-                "Thank you for subscribing to LUXEWEAR!"
-            );
-
-            event.target.reset();
-
-        }
-    );
-
-
-/* =========================================
-   DARK MODE
-========================================= */
-
-themeBtn.addEventListener(
-    "click",
-    () => {
-
-        document.body.classList.toggle(
-            "dark"
-        );
-
-
-        if (
-            document.body.classList.contains(
-                "dark"
-            )
-        ) {
-
-            themeBtn.textContent = "☀️";
-
-            localStorage.setItem(
-                "luxewearTheme",
-                "dark"
-            );
-
-        } else {
-
-            themeBtn.textContent = "🌙";
-
-            localStorage.setItem(
-                "luxewearTheme",
-                "light"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   LOAD THEME
-========================================= */
-
-if (
-    localStorage.getItem(
-        "luxewearTheme"
-    ) === "dark"
-) {
-
-    document.body.classList.add(
-        "dark"
-    );
-
-    themeBtn.textContent = "☀️";
-
-}
-
-
-/* =========================================
-   MOBILE NAVIGATION
-========================================= */
-
-menuBtn.addEventListener(
-    "click",
-    () => {
-
-        navMenu.classList.toggle(
-            "show"
-        );
-
-    }
-);
-
-
-document
-    .querySelectorAll(".nav-menu a")
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            () => {
-
-                navMenu.classList.remove(
-                    "show"
-                );
-
-            }
-        );
-
-    });
-
-
-/* =========================================
-   CLOSE MODALS WHEN CLICKING OUTSIDE
-========================================= */
-
-productModal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === productModal
-        ) {
-
-            closeProductModalWindow();
-
-        }
-
-    }
-);
-
-
-checkoutModal.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === checkoutModal
-        ) {
-
-            checkoutModal.classList.remove(
-                "show"
-            );
-
-            document.body.style.overflow =
-                "auto";
-
-        }
-
-    }
-);
-
-
-/* =========================================
-   ESCAPE KEY
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (event.key !== "Escape") {
-            return;
-        }
-
-        closeProductModalWindow();
-
-        checkoutModal.classList.remove(
-            "show"
-        );
-
-        closeCartWindow();
-
-        document.body.style.overflow =
-            "auto";
-
-    }
-);
-
-
-/* =========================================
-   INITIALIZE
-========================================= */
-
-displayProducts(products);
-
-updateCart();
+/* ---------------- Init ---------------- */
+renderProducts();
+renderCart();
