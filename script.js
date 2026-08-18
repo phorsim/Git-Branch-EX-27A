@@ -365,7 +365,137 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast('Your cart is empty');
             return;
         }
-        showToast('This is a demo — no real checkout here');
+        closeCart();
+        openCheckout();
+    });
+
+    /* =========================================================
+       Checkout modal
+       ========================================================= */
+    const checkoutOverlay = document.getElementById('checkout-overlay');
+    const checkoutModal = document.getElementById('checkout-modal');
+    const checkoutClose = document.getElementById('checkout-close');
+    const checkoutForm = document.getElementById('checkout-form');
+    const checkoutSummary = document.getElementById('checkout-summary');
+    const placeOrderBtn = document.getElementById('place-order-btn');
+    const orderConfirm = document.getElementById('order-confirm');
+    const confirmOrderId = document.getElementById('confirm-order-id');
+    const confirmEmail = document.getElementById('confirm-email');
+    const confirmSummary = document.getElementById('confirm-summary');
+    const confirmCloseBtn = document.getElementById('confirm-close-btn');
+
+    function buildSummaryHTML() {
+        const lines = cart.map(item => `
+      <div class="summary-line">
+        <span>${item.qty} × ${item.name}</span>
+        <span>${money(item.price * item.qty)}</span>
+      </div>
+    `).join('');
+        const subtotal = cart.reduce((sum, i) => sum + i.qty * i.price, 0);
+        const shipping = subtotal > 0 ? 8 : 0;
+        const total = subtotal + shipping;
+        return `
+      ${lines}
+      <div class="summary-line"><span>Shipping</span><span>${money(shipping)}</span></div>
+      <div class="summary-total"><span>Total</span><span>${money(total)}</span></div>
+    `;
+    }
+
+    function openCheckout() {
+        checkoutForm.hidden = false;
+        orderConfirm.hidden = true;
+        checkoutSummary.innerHTML = buildSummaryHTML();
+        checkoutOverlay.classList.add('is-open');
+        checkoutModal.classList.add('is-open');
+        checkoutModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeCheckout() {
+        checkoutOverlay.classList.remove('is-open');
+        checkoutModal.classList.remove('is-open');
+        checkoutModal.setAttribute('aria-hidden', 'true');
+    }
+
+    checkoutClose.addEventListener('click', closeCheckout);
+    checkoutOverlay.addEventListener('click', closeCheckout);
+    confirmCloseBtn.addEventListener('click', closeCheckout);
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeCheckout();
+    });
+
+    function setFieldError(id, message) {
+        const errorEl = document.getElementById(`err-${id}`);
+        const inputEl = document.getElementById(`co-${id}`);
+        errorEl.textContent = message || '';
+        inputEl.closest('.field').classList.toggle('has-error', Boolean(message));
+    }
+
+    function validateCheckout(data) {
+        let valid = true;
+
+        if (!data.name.trim()) { setFieldError('name', 'Enter your name'); valid = false; }
+        else setFieldError('name', '');
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim())) { setFieldError('email', 'Enter a valid email'); valid = false; }
+        else setFieldError('email', '');
+
+        if (!data.address.trim()) { setFieldError('address', 'Enter your address'); valid = false; }
+        else setFieldError('address', '');
+
+        if (!data.city.trim()) { setFieldError('city', 'Enter your city'); valid = false; }
+        else setFieldError('city', '');
+
+        if (!data.zip.trim()) { setFieldError('zip', 'Enter a ZIP / postal code'); valid = false; }
+        else setFieldError('zip', '');
+
+        const cardDigits = data.card.replace(/\s+/g, '');
+        if (!/^\d{13,19}$/.test(cardDigits)) { setFieldError('card', 'Enter a valid card number'); valid = false; }
+        else setFieldError('card', '');
+
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(data.exp.trim())) { setFieldError('exp', 'Use MM/YY'); valid = false; }
+        else setFieldError('exp', '');
+
+        if (!/^\d{3,4}$/.test(data.cvc.trim())) { setFieldError('cvc', '3-4 digits'); valid = false; }
+        else setFieldError('cvc', '');
+
+        return valid;
+    }
+
+    function generateOrderId() {
+        const rand = Math.floor(1000 + Math.random() * 9000);
+        return `FF-ORD-${rand}`;
+    }
+
+    checkoutForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const data = {
+            name: document.getElementById('co-name').value,
+            email: document.getElementById('co-email').value,
+            address: document.getElementById('co-address').value,
+            city: document.getElementById('co-city').value,
+            zip: document.getElementById('co-zip').value,
+            card: document.getElementById('co-card').value,
+            exp: document.getElementById('co-exp').value,
+            cvc: document.getElementById('co-cvc').value
+        };
+
+        if (!validateCheckout(data)) return;
+
+        const orderId = generateOrderId();
+        confirmOrderId.textContent = orderId;
+        confirmEmail.textContent = data.email.trim();
+        confirmSummary.innerHTML = buildSummaryHTML();
+
+        checkoutForm.hidden = true;
+        orderConfirm.hidden = false;
+
+        placeOrderBtn.disabled = false;
+
+        // Clear the cart now that the order is "placed"
+        cart.length = 0;
+        renderCart();
+        checkoutForm.reset();
     });
 
     /* =========================================================
@@ -401,6 +531,20 @@ document.addEventListener('DOMContentLoaded', () => {
         header.style.boxShadow = y > 4 ? '0 1px 0 rgba(32,31,27,0.08)' : 'none';
         lastScroll = y;
     }, { passive: true });
+
+    document.getElementById('co-card').addEventListener('input', e => {
+        let digits = e.target.value.replace(/\D/g, '').slice(0, 19);
+        e.target.value = digits.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    document.getElementById('co-exp').addEventListener('input', e => {
+        let digits = e.target.value.replace(/\D/g, '').slice(0, 4);
+        e.target.value = digits.length > 2 ? `${digits.slice(0, 2)}/${digits.slice(2)}` : digits;
+    });
+
+    document.getElementById('co-cvc').addEventListener('input', e => {
+        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4);
+    });
 
     renderCart();
 });

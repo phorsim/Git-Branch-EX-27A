@@ -252,6 +252,98 @@
         </div>
     </aside>
 
+    <!-- ===== CHECKOUT MODAL ===== -->
+    <div class="modal-overlay" id="checkout-overlay"></div>
+    <div class="checkout-modal" id="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkout-title"
+        aria-hidden="true">
+
+        <div class="checkout-panel" id="checkout-panel">
+            <div class="checkout-head">
+                <h3 id="checkout-title">Checkout</h3>
+                <button class="icon-btn" id="checkout-close" aria-label="Close checkout">✕</button>
+            </div>
+
+            <div class="checkout-body">
+                <div class="checkout-summary" id="checkout-summary"></div>
+
+                <form id="checkout-form" novalidate>
+                    <div class="form-section">
+                        <p class="form-section-label">Contact</p>
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="co-name">Full name</label>
+                                <input type="text" id="co-name" name="name" required>
+                                <span class="field-error" id="err-name"></span>
+                            </div>
+                            <div class="field">
+                                <label for="co-email">Email</label>
+                                <input type="email" id="co-email" name="email" required>
+                                <span class="field-error" id="err-email"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <p class="form-section-label">Shipping address</p>
+                        <div class="form-grid">
+                            <div class="field field-full">
+                                <label for="co-address">Street address</label>
+                                <input type="text" id="co-address" name="address" required>
+                                <span class="field-error" id="err-address"></span>
+                            </div>
+                            <div class="field">
+                                <label for="co-city">City</label>
+                                <input type="text" id="co-city" name="city" required>
+                                <span class="field-error" id="err-city"></span>
+                            </div>
+                            <div class="field">
+                                <label for="co-zip">ZIP / Postal code</label>
+                                <input type="text" id="co-zip" name="zip" required>
+                                <span class="field-error" id="err-zip"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <p class="form-section-label">Payment (demo only)</p>
+                        <div class="form-grid">
+                            <div class="field field-full">
+                                <label for="co-card">Card number</label>
+                                <input type="text" id="co-card" name="card" placeholder="•••• •••• •••• ••••"
+                                    inputmode="numeric" maxlength="19" required>
+                                <span class="field-error" id="err-card"></span>
+                            </div>
+                            <div class="field">
+                                <label for="co-exp">Expiry (MM/YY)</label>
+                                <input type="text" id="co-exp" name="exp" placeholder="MM/YY" maxlength="5" required>
+                                <span class="field-error" id="err-exp"></span>
+                            </div>
+                            <div class="field">
+                                <label for="co-cvc">CVC</label>
+                                <input type="text" id="co-cvc" name="cvc" placeholder="•••" inputmode="numeric"
+                                    maxlength="4" required>
+                                <span class="field-error" id="err-cvc"></span>
+                            </div>
+                        </div>
+                        <p class="demo-note">This is a front-end demo — no real payment is processed and no data leaves
+                            your browser.</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="place-order-btn">Place Order</button>
+                </form>
+
+                <div class="order-confirm" id="order-confirm" hidden>
+                    <div class="confirm-mark" aria-hidden="true">✓</div>
+                    <h4>Order placed</h4>
+                    <p>Order <strong id="confirm-order-id"></strong> is confirmed. A receipt would normally go to <span
+                            id="confirm-email"></span>.</p>
+                    <div class="checkout-summary" id="confirm-summary"></div>
+                    <button class="btn btn-ghost btn-block" id="confirm-close-btn">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
