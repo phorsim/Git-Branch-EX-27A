@@ -94,7 +94,8 @@
             <div class="section-head">
                 <p class="eyebrow">SS26 · CURRENT STOCK</p>
                 <h2>The Lineup</h2>
-                <p class="section-sub">Six pieces. Built to be worn hard, washed often, and passed down eventually.</p>
+                <p class="section-sub">100 pieces across the full lineup. Built to be worn hard, washed often, and
+                    passed down eventually.</p>
             </div>
 
             <div class="filter-row" id="filter-row">
@@ -102,131 +103,17 @@
                 <button class="filter-btn" data-filter="tops">Tops</button>
                 <button class="filter-btn" data-filter="outerwear">Outerwear</button>
                 <button class="filter-btn" data-filter="bottoms">Bottoms</button>
+                <button class="filter-btn" data-filter="accessories">Accessories</button>
+                <span class="result-count" id="result-count"></span>
             </div>
 
-            <div class="product-grid" id="product-grid">
+            <div class="product-grid" id="product-grid"></div>
 
-                <article class="product-card" data-category="outerwear" data-name="Chore Coat, Indigo" data-price="188"
-                    data-sku="FF-014">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=700&q=80"
-                            alt="Indigo chore coat">
-                        <span class="stock-stamp">IN STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Chore Coat, Indigo</h3>
-                            <span class="price">$188</span>
-                        </div>
-                        <p class="product-desc">10oz duck canvas, triple-stitched pockets, corozo buttons.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-014</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-category="tops" data-name="Heavyweight Tee, Ink" data-price="42"
-                    data-sku="FF-002">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=80"
-                            alt="Ink black heavyweight t-shirt">
-                        <span class="stock-stamp">IN STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Heavyweight Tee, Ink</h3>
-                            <span class="price">$42</span>
-                        </div>
-                        <p class="product-desc">240gsm combed cotton, tubular knit, no side seam.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-002</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-category="bottoms" data-name="Utility Trouser, Olive" data-price="96"
-                    data-sku="FF-021">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=700&q=80"
-                            alt="Olive utility trousers">
-                        <span class="stock-stamp">IN STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Utility Trouser, Olive</h3>
-                            <span class="price">$96</span>
-                        </div>
-                        <p class="product-desc">Ripstop cotton, articulated knee, hidden tool pocket.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-021</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-category="outerwear" data-name="Shop Vest, Rust" data-price="118"
-                    data-sku="FF-017">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80"
-                            alt="Rust colored shop vest">
-                        <span class="stock-stamp">LOW STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Shop Vest, Rust</h3>
-                            <span class="price">$118</span>
-                        </div>
-                        <p class="product-desc">Waxed canvas shell, blanket lining, brass hardware.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-017</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-category="tops" data-name="Flannel Overshirt" data-price="78"
-                    data-sku="FF-009">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=700&q=80"
-                            alt="Flannel overshirt">
-                        <span class="stock-stamp">IN STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Flannel Overshirt</h3>
-                            <span class="price">$78</span>
-                        </div>
-                        <p class="product-desc">Double-napped brushed cotton, curved hem, snap cuffs.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-009</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="product-card" data-category="bottoms" data-name="Selvedge Denim, Raw" data-price="142"
-                    data-sku="FF-026">
-                    <div class="product-media">
-                        <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=80"
-                            alt="Raw selvedge denim jeans">
-                        <span class="stock-stamp">IN STOCK</span>
-                    </div>
-                    <div class="product-body">
-                        <div class="product-row">
-                            <h3>Selvedge Denim, Raw</h3>
-                            <span class="price">$142</span>
-                        </div>
-                        <p class="product-desc">14oz Japanese selvedge, chain-stitched hem, will fade honest.</p>
-                        <div class="product-row product-meta">
-                            <span class="sku">SKU FF-026</span>
-                            <button class="btn btn-small add-to-cart">Add to Cart</button>
-                        </div>
-                    </div>
-                </article>
-
+            <div class="load-more-row">
+                <button class="btn btn-ghost" id="load-more-btn">Load More</button>
+                <p class="load-more-note" id="load-more-note"></p>
             </div>
+
         </div>
     </section>
 
