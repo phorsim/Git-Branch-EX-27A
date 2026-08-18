@@ -19,6 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =========================================================
+       Scroll-spy: highlight the nav link for the section in view
+       ========================================================= */
+    const navLinks = document.querySelectorAll('[data-nav-link]');
+    const navSections = Array.from(navLinks)
+        .map(link => document.querySelector(link.getAttribute('href')))
+        .filter(Boolean);
+
+    function setActiveLink(id) {
+        navLinks.forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === `#${id}`);
+        });
+    }
+
+    if ('IntersectionObserver' in window && navSections.length) {
+        const spyObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, {
+            rootMargin: '-45% 0px -50% 0px', // trigger when section crosses mid-viewport
+            threshold: 0
+        });
+
+        navSections.forEach(section => spyObserver.observe(section));
+    }
+
+    /* =========================================================
        Product filtering
        ========================================================= */
     const filterButtons = document.querySelectorAll('.filter-btn');

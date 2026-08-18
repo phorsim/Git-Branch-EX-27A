@@ -256,6 +256,8 @@ p {
     text-decoration: none;
     position: relative;
     padding-bottom: 4px;
+    color: var(--ink-70);
+    transition: color 0.15s ease;
 }
 
 .main-nav a::after {
@@ -269,8 +271,21 @@ p {
     transition: right 0.2s ease;
 }
 
+.main-nav a:hover {
+    color: var(--ink);
+}
+
 .main-nav a:hover::after {
     right: 0;
+}
+
+.main-nav a.is-active {
+    color: var(--ink);
+}
+
+.main-nav a.is-active::after {
+    right: 0;
+    background: var(--indigo);
 }
 
 .header-actions {
