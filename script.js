@@ -1,3 +1,101 @@
+/* =========================================================
+   PRODUCT CATALOG — generated data
+   Reuses a small set of verified image URLs per category
+   (a real store would have one photo per SKU; here they
+   cycle so every card still renders a relevant, working image).
+   ========================================================= */
+const CATALOG_CONFIG = {
+    tops: {
+        types: ['Heavyweight Tee', 'Flannel Overshirt', 'Chambray Shirt', 'Crewneck Sweatshirt', 'Waffle Henley', 'Oxford Work Shirt', 'Loopback Fleece Pullover', 'Ribbed Tank'],
+        colors: ['Ink', 'Rust', 'Olive', 'Indigo', 'Canvas', 'Charcoal', 'Clay', 'Stone', 'Bone'],
+        materials: ['240gsm combed cotton', 'double-napped brushed flannel', 'washed chambray', '14oz loopback fleece', 'waffle-knit cotton', 'brushed oxford weave'],
+        basePrice: 38,
+        priceStep: 5,
+        images: [
+            'photo-1521572163474-6864f9cf17ab',
+            'photo-1596755094514-f87e34085b2c',
+            'photo-1618354691373-d851c5c3a990',
+            'photo-1562157873-818bc0726f68'
+        ]
+    },
+    bottoms: {
+        types: ['Utility Trouser', 'Selvedge Denim', 'Cargo Pant', 'Canvas Short', 'Relaxed Chino', 'Straight Jean', 'Ripstop Work Pant'],
+        colors: ['Olive', 'Raw Indigo', 'Stone', 'Charcoal', 'Canvas', 'Rust', 'Ink'],
+        materials: ['ripstop cotton', '14oz Japanese selvedge', 'brushed twill', '10oz canvas', 'sanforized denim'],
+        basePrice: 68,
+        priceStep: 6,
+        images: [
+            'photo-1473966968600-fa801b869a1a',
+            'photo-1542272604-787c3835535d',
+            'photo-1584865288642-42078afe6942'
+        ]
+    },
+    outerwear: {
+        types: ['Chore Coat', 'Shop Vest', 'Denim Jacket', 'Field Jacket', 'Canvas Parka', 'Wool Overshirt'],
+        colors: ['Indigo', 'Rust', 'Olive', 'Charcoal', 'Canvas', 'Stone'],
+        materials: ['10oz duck canvas', 'waxed canvas', 'rigid selvedge denim', 'brushed melton wool', 'ripstop nylon shell'],
+        basePrice: 96,
+        priceStep: 9,
+        images: [
+            'photo-1544022613-e87ca75a784a',
+            'photo-1551028719-00167b16eac5',
+            'photo-1523381210434-271e8be1f52b'
+        ]
+    },
+    accessories: {
+        types: ['Canvas Tote', 'Leather Belt', 'Wool Beanie', 'Work Cap', 'Shop Apron', 'Canvas Duffel', 'Cotton Bandana'],
+        colors: ['Ink', 'Rust', 'Olive', 'Canvas', 'Stone', 'Indigo'],
+        materials: ['10oz waxed canvas', 'full-grain leather', 'merino wool blend', 'brushed cotton twill'],
+        basePrice: 22,
+        priceStep: 4,
+        images: [
+            'photo-1489987707025-afc232f7ea0f',
+            'photo-1544022613-e87ca75a784a'
+        ]
+    }
+};
+
+const CATEGORY_TARGET_COUNTS = { tops: 30, bottoms: 25, outerwear: 24, accessories: 21 };
+
+function buildCatalog() {
+    const products = [];
+    let skuCounter = 1;
+
+    Object.entries(CATEGORY_TARGET_COUNTS).forEach(([category, count]) => {
+        const cfg = CATALOG_CONFIG[category];
+        let combosMade = 0;
+        outer:
+        for (let t = 0; t < cfg.types.length; t++) {
+            for (let c = 0; c < cfg.colors.length; c++) {
+                if (combosMade >= count) break outer;
+                const type = cfg.types[t];
+                const color = cfg.colors[c];
+                const material = cfg.materials[(t + c) % cfg.materials.length];
+                const image = cfg.images[combosMade % cfg.images.length];
+                const price = cfg.basePrice + ((t * 3 + c) % 7) * cfg.priceStep;
+                const sku = `FF-${String(skuCounter).padStart(3, '0')}`;
+
+                products.push({
+                    sku,
+                    name: `${type}, ${color}`,
+                    category,
+                    price,
+                    desc: `${material[0].toUpperCase()}${material.slice(1)}, cut for daily wear.`,
+                    image: `https://images.unsplash.com/${image}?auto=format&fit=crop&w=700&q=80`,
+                    lowStock: skuCounter % 9 === 0
+                });
+
+                skuCounter++;
+                combosMade++;
+            }
+        }
+    });
+
+    return products;
+}
+
+const CATALOG = buildCatalog();
+
 document.addEventListener('DOMContentLoaded', () => {
 
     /* =========================================================
@@ -48,23 +146,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =========================================================
-       Product filtering
+       Product rendering, filtering & load-more
        ========================================================= */
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('.product-card');
+    const productGrid = document.getElementById('product-grid');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreNote = document.getElementById('load-more-note');
+    const resultCount = document.getElementById('result-count');
+
+    const PAGE_SIZE = 12;
+    let currentFilter = 'all';
+    let visibleCount = PAGE_SIZE;
+
+    function cardMarkup(product) {
+        return `
+      <article class="product-card" data-category="${product.category}" data-name="${product.name}" data-price="${product.price}" data-sku="${product.sku}">
+        <div class="product-media">
+          <img src="${product.image}" alt="${product.name}" loading="lazy">
+          <span class="stock-stamp">${product.lowStock ? 'LOW STOCK' : 'IN STOCK'}</span>
+        </div>
+        <div class="product-body">
+          <div class="product-row">
+            <h3>${product.name}</h3>
+            <span class="price">$${product.price}</span>
+          </div>
+          <p class="product-desc">${product.desc}</p>
+          <div class="product-row product-meta">
+            <span class="sku">SKU ${product.sku}</span>
+            <button class="btn btn-small add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </article>
+    `;
+    }
+
+    function getFiltered() {
+        return currentFilter === 'all'
+            ? CATALOG
+            : CATALOG.filter(p => p.category === currentFilter);
+    }
+
+    function renderProducts() {
+        const filtered = getFiltered();
+        const slice = filtered.slice(0, visibleCount);
+
+        productGrid.innerHTML = slice.map(cardMarkup).join('');
+
+        resultCount.textContent = `${filtered.length} item${filtered.length === 1 ? '' : 's'}`;
+
+        const remaining = filtered.length - slice.length;
+        if (remaining > 0) {
+            loadMoreBtn.hidden = false;
+            loadMoreNote.textContent = `Showing ${slice.length} of ${filtered.length}`;
+        } else {
+            loadMoreBtn.hidden = true;
+            loadMoreNote.textContent = filtered.length
+                ? `Showing all ${filtered.length}`
+                : '';
+        }
+    }
+
+    loadMoreBtn.addEventListener('click', () => {
+        visibleCount += PAGE_SIZE;
+        renderProducts();
+    });
 
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             filterButtons.forEach(b => b.classList.remove('is-active'));
             btn.classList.add('is-active');
-
-            const filter = btn.dataset.filter;
-            productCards.forEach(card => {
-                const match = filter === 'all' || card.dataset.category === filter;
-                card.classList.toggle('is-hidden', !match);
-            });
+            currentFilter = btn.dataset.filter;
+            visibleCount = PAGE_SIZE;
+            renderProducts();
         });
     });
+
+    // Event delegation: cards are rendered dynamically, so listen on the grid
+    productGrid.addEventListener('click', e => {
+        const btn = e.target.closest('.add-to-cart');
+        if (!btn) return;
+        const card = btn.closest('.product-card');
+        const product = {
+            sku: card.dataset.sku,
+            name: card.dataset.name,
+            price: Number(card.dataset.price),
+            image: card.querySelector('img').src
+        };
+        addToCart(product, btn);
+    });
+
+    renderProducts();
 
     /* =========================================================
        Cart
@@ -167,19 +338,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1200);
         }
     }
-
-    document.querySelectorAll('.add-to-cart').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const card = btn.closest('.product-card');
-            const product = {
-                sku: card.dataset.sku,
-                name: card.dataset.name,
-                price: Number(card.dataset.price),
-                image: card.querySelector('img').src
-            };
-            addToCart(product, btn);
-        });
-    });
 
     cartItemsEl.addEventListener('click', e => {
         const target = e.target.closest('[data-action]');
