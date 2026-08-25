@@ -4,636 +4,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>LUXEWEAR | Modern Fashion Store</title>
-
+    <title>Field &amp; Form — Well-Made Basics for Everyday Work</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./script.js">
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
-
-    <header class="header">
-
-        <div class="container nav">
-
-            <a href="#home" class="logo">
-                LUXE<span>WEAR</span>
+    <!-- ===== HEADER ===== -->
+    <header class="site-header">
+        <div class="wrap header-inner">
+            <a href="#top" class="logo">
+                <span class="logo-mark">F&amp;F</span>
+                <span class="logo-word">Field <em>&amp;</em> Form</span>
             </a>
 
-            <nav class="nav-menu" id="navMenu">
-
-                <a href="#home">Home</a>
-                <a href="#shop">Shop</a>
-                <a href="#sale">Sale</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-
+            <nav class="main-nav" id="main-nav">
+                <a href="#lineup" data-nav-link>The Lineup</a>
+                <a href="#craft" data-nav-link>Craft</a>
+                <a href="#journal" data-nav-link>Care Notes</a>
+                <a href="#signup" data-nav-link>Join Up</a>
             </nav>
 
-            <div class="nav-actions">
-
-                <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">
-                    🌙
+            <div class="header-actions">
+                <button class="icon-btn" id="cart-btn" aria-label="Open cart">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+                        stroke-width="1.6">
+                        <path d="M3 6h2l2.4 12.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.6L21 8H6" />
+                        <circle cx="10" cy="21" r="1" />
+                        <circle cx="18" cy="21" r="1" />
+                    </svg>
+                    <span class="cart-count" id="cart-count">0</span>
                 </button>
-
-                <button class="cart-btn" id="cartBtn" aria-label="Open shopping cart">
-                    🛒
-                    <span id="cartCount">0</span>
+                <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span><span></span><span></span>
                 </button>
-
-                <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-                    ☰
-                </button>
-
             </div>
-
         </div>
-
     </header>
 
-
-    <!-- ================= HERO ================= -->
-
-    <main>
-
-        <section class="hero" id="home">
-
-            <div class="container hero-content">
-
-                <div class="hero-text">
-
-                    <p class="eyebrow">
-                        NEW COLLECTION 2026
-                    </p>
-
-                    <h1>
-                        STYLE THAT
-                        <span>SPEAKS</span>
-                        FOR YOU.
-                    </h1>
-
-                    <p class="hero-description">
-                        Discover modern fashion designed for your everyday
-                        confidence. Premium clothes, simple style and
-                        affordable prices.
-                    </p>
-
-                    <div class="hero-buttons">
-
-                        <a href="#shop" class="btn btn-dark">
-                            SHOP NOW
-                        </a>
-
-                        <a href="#sale" class="btn btn-outline">
-                            VIEW SALE
-                        </a>
-
-                    </div>
-
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="top">
+        <div class="wrap hero-inner">
+            <div class="hero-copy">
+                <p class="eyebrow">EST. 2016 &nbsp;·&nbsp; MADE FOR THE SHIFT AHEAD</p>
+                <h1>Clothes that clock in<br> before you do.</h1>
+                <p class="hero-lede">Heavyweight cotton, bar-tacked seams, and cuts that move with a full day's work. No
+                    wash-day surprises, no thin spots by spring. We spec every piece like a tool — because that's what
+                    it is.</p>
+                <div class="hero-actions">
+                    <a href="#lineup" class="btn btn-primary">Shop The Lineup</a>
+                    <a href="#craft" class="btn btn-ghost">Why It Holds Up</a>
                 </div>
-
-                <div class="hero-image">
-
-                    <div class="hero-card">
-
-                        <div class="hero-model">
-                            👕
-                        </div>
-
-                        <div class="hero-badge">
-                            NEW
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
 
-        </section>
-
-
-        <!-- ================= CATEGORIES ================= -->
-
-        <section class="categories">
-
-            <div class="container">
-
-                <div class="section-title">
-
-                    <p>SHOP BY CATEGORY</p>
-
-                    <h2>
-                        Find Your Style
-                    </h2>
-
+            <div class="hero-visual">
+                <div class="tag-swatch" aria-hidden="true">
+                    <span>NO. 04</span>
+                    <span>12oz CANVAS</span>
+                    <span>SANFORIZED</span>
                 </div>
+                <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=80"
+                    alt="Model wearing a heavyweight canvas work jacket" class="hero-img">
+                <div class="stitch-line" aria-hidden="true"></div>
+            </div>
+        </div>
+    </section>
 
-                <div class="category-grid">
+    <!-- ===== TRUST STRIP ===== -->
+    <div class="trust-strip">
+        <div class="wrap trust-inner">
+            <span>FREE REPAIRS, YEAR ONE</span>
+            <span>·</span>
+            <span>SHIPS IN 48HRS</span>
+            <span>·</span>
+            <span>GOTS-CERTIFIED COTTON</span>
+            <span>·</span>
+            <span>MADE-TO-LAST GUARANTEE</span>
+        </div>
+    </div>
 
-                    <button class="category-card" data-category="T-Shirts">
-                        <span>👕</span>
-                        <h3>T-Shirts</h3>
-                    </button>
-
-                    <button class="category-card" data-category="Shirts">
-                        <span>👔</span>
-                        <h3>Shirts</h3>
-                    </button>
-
-                    <button class="category-card" data-category="Pants">
-                        <span>👖</span>
-                        <h3>Pants</h3>
-                    </button>
-
-                    <button class="category-card" data-category="Dresses">
-                        <span>👗</span>
-                        <h3>Dresses</h3>
-                    </button>
-
-                </div>
-
+    <!-- ===== LINEUP ===== -->
+    <section class="lineup" id="lineup">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">SS26 · CURRENT STOCK</p>
+                <h2>The Lineup</h2>
+                <p class="section-sub">100 pieces across the full lineup. Built to be worn hard, washed often, and
+                    passed down eventually.</p>
             </div>
 
-        </section>
+            <div class="filter-row" id="filter-row">
+                <button class="filter-btn is-active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="tops">Tops</button>
+                <button class="filter-btn" data-filter="outerwear">Outerwear</button>
+                <button class="filter-btn" data-filter="bottoms">Bottoms</button>
+                <button class="filter-btn" data-filter="accessories">Accessories</button>
+                <span class="result-count" id="result-count"></span>
+            </div>
 
+            <div class="product-grid" id="product-grid"></div>
 
-        <!-- ================= SHOP ================= -->
+            <div class="load-more-row">
+                <button class="btn btn-ghost" id="load-more-btn">Load More</button>
+                <p class="load-more-note" id="load-more-note"></p>
+            </div>
 
-        <section class="shop" id="shop">
+        </div>
+    </section>
 
-            <div class="container">
+    <!-- ===== CRAFT / VALUE PROPS ===== -->
+    <section class="craft" id="craft">
+        <div class="wrap">
+            <div class="section-head">
+                <p class="eyebrow">THE SPEC SHEET</p>
+                <h2>Why it holds up</h2>
+            </div>
 
-                <div class="section-title">
-
-                    <p>OUR COLLECTION</p>
-
-                    <h2>
-                        Shop Latest Fashion
-                    </h2>
-
-                </div>
-
-
-                <!-- SEARCH + FILTER -->
-
-                <div class="shop-controls">
-
-                    <div class="search-box">
-
-                        <span>🔍</span>
-
-                        <input type="text" id="searchInput" placeholder="Search clothes...">
-
+            <div class="craft-grid">
+                <div class="craft-item">
+                    <div class="craft-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M6 12h36M6 24h36M6 36h36" />
+                            <path d="M12 6v6M24 6v6M36 6v6M12 30v6M24 30v6M36 30v6" />
+                        </svg>
                     </div>
-
-                    <select id="categoryFilter">
-
-                        <option value="All">
-                            All Categories
-                        </option>
-
-                        <option value="T-Shirts">
-                            T-Shirts
-                        </option>
-
-                        <option value="Shirts">
-                            Shirts
-                        </option>
-
-                        <option value="Pants">
-                            Pants
-                        </option>
-
-                        <option value="Dresses">
-                            Dresses
-                        </option>
-
-                        <option value="Jackets">
-                            Jackets
-                        </option>
-
-                    </select>
-
-
-                    <select id="sortFilter">
-
-                        <option value="default">
-                            Sort By
-                        </option>
-
-                        <option value="low">
-                            Price: Low to High
-                        </option>
-
-                        <option value="high">
-                            Price: High to Low
-                        </option>
-
-                        <option value="name">
-                            Name
-                        </option>
-
-                    </select>
-
+                    <h3>Fabric first</h3>
+                    <p>We buy woven and knit cotton by the bolt from mills we've used for years — not by the season's
+                        trend forecast. Heavier grams, tighter weaves, fewer thin spots by month three.</p>
                 </div>
-
-
-                <!-- PRODUCTS -->
-
-                <div class="products-grid" id="productsGrid">
-                </div>
-
-                <p class="no-products" id="noProducts">
-                    No products found.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SALE ================= -->
-
-        <section class="sale" id="sale">
-
-            <div class="container sale-content">
-
-                <div>
-
-                    <p class="sale-label">
-                        LIMITED TIME OFFER
-                    </p>
-
-                    <h2>
-                        UP TO <span>50% OFF</span>
-                    </h2>
-
-                    <p>
-                        Upgrade your wardrobe without
-                        breaking your budget.
-                    </p>
-
-                    <a href="#shop" class="btn btn-light">
-                        SHOP SALE
-                    </a>
-
-                </div>
-
-                <div class="sale-icon">
-                    🏷️
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= ABOUT ================= -->
-
-        <section class="about" id="about">
-
-            <div class="container about-grid">
-
-                <div class="about-visual">
-
-                    <div class="about-symbol">
-                        LW
+                <div class="craft-item">
+                    <div class="craft-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <path d="M6 42C14 34 34 14 42 6M10 10l4 4M18 18l4 4M26 26l4 4M34 34l4 4" />
+                        </svg>
                     </div>
-
+                    <h3>Stitched to work</h3>
+                    <p>Bar tacks at every stress point, felled seams on anything that'll take a load, and a stitch count
+                        that's overbuilt on purpose. If a seam gives, we fix it free the first year.</p>
                 </div>
-
-                <div class="about-text">
-
-                    <p class="eyebrow">
-                        ABOUT LUXEWEAR
-                    </p>
-
-                    <h2>
-                        Fashion Made
-                        <span>Simple.</span>
-                    </h2>
-
-                    <p>
-                        LUXEWEAR is a modern fashion brand focused on
-                        comfortable, stylish and affordable clothing.
-                    </p>
-
-                    <p>
-                        Our goal is simple: help everyone express their
-                        personality through fashion.
-                    </p>
-
-                    <div class="features">
-
-                        <div>
-                            <strong>✓</strong>
-                            Premium Quality
-                        </div>
-
-                        <div>
-                            <strong>✓</strong>
-                            Affordable Prices
-                        </div>
-
-                        <div>
-                            <strong>✓</strong>
-                            Fast Delivery
-                        </div>
-
-                        <div>
-                            <strong>✓</strong>
-                            Easy Returns
-                        </div>
-
+                <div class="craft-item">
+                    <div class="craft-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" width="34" height="34" fill="none" stroke="currentColor"
+                            stroke-width="1.6">
+                            <rect x="10" y="6" width="28" height="36" rx="2" />
+                            <path d="M16 16h16M16 24h16M16 32h10" />
+                        </svg>
                     </div>
-
+                    <h3>Cut to move</h3>
+                    <p>Gusseted underarms, articulated knees, and a torso that doesn't ride up when you reach overhead.
+                        Sized for the body you actually have on a work day, not a lookbook.</p>
                 </div>
-
             </div>
+        </div>
+    </section>
 
-        </section>
-
-
-        <!-- ================= CONTACT ================= -->
-
-        <section class="contact" id="contact">
-
-            <div class="container">
-
-                <div class="section-title">
-
-                    <p>CONTACT US</p>
-
-                    <h2>
-                        We'd Love To Hear From You
-                    </h2>
-
-                </div>
-
-                <form class="contact-form" id="contactForm">
-
-                    <div class="form-row">
-
-                        <input type="text" id="contactName" placeholder="Your Name" required>
-
-                        <input type="email" id="contactEmail" placeholder="Your Email" required>
-
-                    </div>
-
-                    <input type="text" placeholder="Subject" required>
-
-                    <textarea placeholder="Your message..." rows="6" required></textarea>
-
-                    <button type="submit" class="btn btn-dark">
-                        SEND MESSAGE
-                    </button>
-
-                </form>
-
+    <!-- ===== JOURNAL / CARE NOTES ===== -->
+    <section class="journal" id="journal">
+        <div class="wrap journal-inner">
+            <div class="journal-copy">
+                <p class="eyebrow">CARE NOTES, NO. 12</p>
+                <h2>Wash cold. Hang dry. It'll outlast the dryer anyway.</h2>
+                <p>Heavyweight cotton doesn't need coddling, just consistency. Turn garments inside out, wash cold with
+                    like colors, and skip the dryer on anything with a print or wax finish — air gets it there just as
+                    fast and keeps the fibers long.</p>
+                <a href="#" class="text-link">Read the full care guide →</a>
             </div>
+            <div class="journal-media">
+                <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=800&q=80"
+                    alt="Folded stack of heavyweight cotton garments">
+            </div>
+        </div>
+    </section>
 
-        </section>
-
-    </main>
-
-
-    <!-- ================= FOOTER ================= -->
-
-    <footer>
-
-        <div class="container footer-grid">
-
+    <!-- ===== SIGNUP ===== -->
+    <section class="signup" id="signup">
+        <div class="wrap signup-inner">
             <div>
-
-                <a href="#home" class="logo footer-logo">
-                    LUXE<span>WEAR</span>
-                </a>
-
-                <p>
-                    Modern fashion for modern people.
-                </p>
-
-                <div class="socials">
-
-                    <a href="#">f</a>
-                    <a href="#">◎</a>
-                    <a href="#">t</a>
-
-                </div>
-
+                <p class="eyebrow">RESTOCK NOTICES ONLY</p>
+                <h2>Join the shop list.</h2>
+                <p class="section-sub">One email when new stock lands. No daily noise, no discount spam.</p>
             </div>
+            <form class="signup-form" id="signup-form" novalidate>
+                <label for="email" class="visually-hidden">Email address</label>
+                <input type="email" id="email" name="email" placeholder="you@somewhere.com" required>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <p class="form-note" id="form-note" role="status"></p>
+        </div>
+    </section>
 
-
-            <div class="footer-links">
-
-                <h3>Shop</h3>
-
-                <a href="#shop">New Arrivals</a>
-                <a href="#shop">T-Shirts</a>
-                <a href="#shop">Pants</a>
-                <a href="#sale">Sale</a>
-
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+        <div class="wrap footer-inner">
+            <div class="footer-brand">
+                <span class="logo-mark">F&amp;F</span>
+                <span class="logo-word">Field <em>&amp;</em> Form</span>
+                <p>Well-made basics for everyday work. Cut, sewn, and warrantied with that in mind.</p>
             </div>
-
-
-            <div class="footer-links">
-
-                <h3>Help</h3>
-
-                <a href="#">Shipping</a>
+            <div class="footer-col">
+                <h4>Shop</h4>
+                <a href="#lineup">The Lineup</a>
+                <a href="#">Outerwear</a>
+                <a href="#">Denim</a>
+                <a href="#">Gift Cards</a>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <a href="#">Sizing Guide</a>
+                <a href="#">Repairs</a>
                 <a href="#">Returns</a>
-                <a href="#">Size Guide</a>
-                <a href="#contact">Contact</a>
-
+                <a href="#">Contact</a>
             </div>
-
-
-            <div class="footer-links">
-
-                <h3>Newsletter</h3>
-
-                <p>
-                    Subscribe for new collections
-                    and special offers.
-                </p>
-
-                <form class="newsletter" id="newsletterForm">
-
-                    <input type="email" placeholder="Your email" required>
-
-                    <button>
-                        →
-                    </button>
-
-                </form>
-
+            <div class="footer-col">
+                <h4>Shop List</h4>
+                <p class="footer-note">Restock notices only, unsubscribe anytime.</p>
             </div>
-
         </div>
-
-
-        <div class="copyright">
-
-            © 2026 LUXEWEAR.
-            All Rights Reserved.
-
+        <div class="wrap footer-bottom">
+            <span>© 2026 Field &amp; Form Supply Co.</span>
+            <span>Stitched in the browser with plain HTML, CSS &amp; JS.</span>
         </div>
-
     </footer>
 
-
-    <!-- ================= PRODUCT MODAL ================= -->
-
-    <div class="modal" id="productModal">
-
-        <div class="modal-content">
-
-            <button class="close-modal" id="closeProductModal">
-                ×
-            </button>
-
-            <div id="productModalContent"></div>
-
+    <!-- ===== CART DRAWER ===== -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-head">
+            <h3>Your Cart</h3>
+            <button class="icon-btn" id="cart-close" aria-label="Close cart">✕</button>
         </div>
-
-    </div>
-
-
-    <!-- ================= CART SIDEBAR ================= -->
-
-    <div class="cart-overlay" id="cartOverlay"></div>
-
-    <aside class="cart-sidebar" id="cartSidebar">
-
-        <div class="cart-header">
-
-            <h2>
-                Your Cart
-            </h2>
-
-            <button id="closeCart" class="close-cart">
-                ×
-            </button>
-
+        <div class="cart-items" id="cart-items">
+            <p class="cart-empty" id="cart-empty">Cart's empty. Go rough up some canvas.</p>
         </div>
-
-
-        <div class="cart-items" id="cartItems">
-        </div>
-
-
-        <div class="cart-empty" id="cartEmpty">
-
-            <span>🛒</span>
-
-            <h3>
-                Your cart is empty
-            </h3>
-
-            <p>
-                Add something you love!
-            </p>
-
-        </div>
-
-
         <div class="cart-footer">
-
-            <div class="cart-total">
-
-                <span>
-                    Total
-                </span>
-
-                <strong id="cartTotal">
-                    $0.00
-                </strong>
-
+            <div class="cart-row">
+                <span>Subtotal</span>
+                <span id="cart-subtotal">$0</span>
             </div>
-
-            <button class="btn btn-dark checkout-btn" id="checkoutBtn">
-                CHECKOUT
-            </button>
-
+            <button class="btn btn-primary btn-block" id="checkout-btn">Checkout</button>
         </div>
-
     </aside>
 
-
-    <!-- ================= CHECKOUT MODAL ================= -->
-
-    <div class="modal" id="checkoutModal">
-
-        <div class="modal-content checkout-content">
-
-            <button class="close-modal" id="closeCheckout">
-                ×
-            </button>
-
-            <h2>
-                Checkout
-            </h2>
-
-            <p class="checkout-subtitle">
-                Complete your order information.
-            </p>
-
-
-            <form id="checkoutForm">
-
-                <input type="text" id="customerName" placeholder="Full Name" required>
-
-                <input type="email" id="customerEmail" placeholder="Email Address" required>
-
-                <input type="tel" id="customerPhone" placeholder="Phone Number" required>
-
-                <input type="text" id="customerAddress" placeholder="Delivery Address" required>
-
-                <select id="paymentMethod" required>
-
-                    <option value="">
-                        Select Payment Method
-                    </option>
-
-                    <option value="Cash on Delivery">
-                        Cash on Delivery
-                    </option>
-
-                    <option value="Credit Card">
-                        Credit Card
-                    </option>
-
-                    <option value="ABA Pay">
-                        ABA Pay
-                    </option>
-
-                </select>
-
-                <button type="submit" class="btn btn-dark">
-                    PLACE ORDER
-                </button>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-    <!-- ================= JAVASCRIPT ================= -->
+    <div class="toast" id="toast"></div>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>
